@@ -1,0 +1,138 @@
+@startuml
+skinparam ActorBorderColor black
+skinparam ActorBackgroundColor white
+skinparam SequenceLifeLineBorderColor black
+skinparam ParticipantBorderColor black
+skinparam ParticipantBackgroundColor white
+skinparam ArrowColor black
+skinparam SequenceGroupBorderColor #6C8EBF 
+
+actor actor as "Utente"
+participant browser as "Browser"
+participant bff as "BFF"
+participant scanService as "Scan Service"
+participant minio as "MINIO"
+participant fdi as "FDI"
+participant kafka as "Kafka"
+
+
+
+
+activate actor
+actor -> browser: esegui scansione
+
+activate browser
+browser -> bff : esegui scansione
+
+activate bff
+
+bff -> scanService
+activate scanService 
+
+scanService -> minio : archivia scansione
+activate minio
+
+minio -> minio
+
+minio --> scanService
+deactivate minio
+
+scanService --> bff
+deactivate scanService
+
+bff -> fdi : aggiorna contesto
+note right: contesto + lista scansioni
+activate fdi
+
+fdi -> fdi
+
+fdi --> bff
+deactivate fdi
+
+bff --> browser
+deactivate bff
+
+browser --> actor
+deactivate browser
+
+
+alt visualizza preview = true
+actor -> browser : visualizza preview
+activate browser
+note left: loader in corso
+
+browser -> bff : genera preview
+activate bff
+note right: async request reply pattern
+
+bff -> kafka : preview request event
+activate kafka
+kafka --> bff
+deactivate kafka
+
+bff --> browser
+note bottom: restituisce i seguenti <b>header</b>:\n<b>- location:</b> url per polling\n<b>- retry-after:</b> tempo stimato per riprovare
+
+scanService -> kafka : consume preview request
+activate kafka
+activate scanService 
+scanService -> scanService
+
+scanService -> minio : recupera file
+minio --> scanService 
+
+scanService -> scanService : elabora immagine
+activate minio
+
+scanService -> minio : salva anteprima elaborata
+scanService -> kafka : commit
+deactivate kafka
+deactivate scanService 
+deactivate minio
+ 
+browser -> bff: get preview
+bff -> minio
+activate minio
+
+minio --> bff : preview
+deactivate minio
+bff --> browser : preview
+deactivate bff
+
+browser --> actor : preview
+
+end
+
+actor -> browser : prosegui
+deactivate actor
+browser -> bff : prosegui
+deactivate browser
+activate bff
+
+bff -> kafka : merge event
+activate kafka
+kafka --> bff
+deactivate kafka
+deactivate bff
+
+scanService -> kafka : consuma merge event
+activate scanService
+activate kafka
+
+scanService -> scanService : merge
+
+scanService -> minio : salva
+activate minio
+minio --> scanService
+deactivate minio
+note right: salva su minio o altri target
+
+scanService -> kafka : commit
+
+
+
+
+
+
+
+@enduml
