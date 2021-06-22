@@ -41,6 +41,8 @@ opentracing:
       port: 6831
     service-name: order-service
 
-management.trace.http.enabled: true
+managementtrace.http.enabled: true
 management.endpoints.web.exposure.include: "*,httptrace,prometheus,bindings,streamsbindings"
 management.endpoint.health.show-details: always
+management.port: 8066
+management.context-path: "/manage"
