@@ -1,6 +1,7 @@
 logging:
   level:
-    root: INFO
+    root: ERROR
+    com.workshop.gke.order.service.delegate.ServiceTask: DEBUG
 
 server:
    servlet:
@@ -13,8 +14,17 @@ spring:
    jackson:
       date-format: yyyy-MM-dd
    datasource:
+      username: postgres
+      password: dev   
       url: jdbc:h2:mem:testdb
       driverClassName: org.h2.Driver
+   camunda: 
+     connectionTimeout: 180000
+     dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+     idleTimeout: 180000
+     maxLifetime: 1800000
+     minimumIdle: 5
+     poolName: proximity-channel-orchestrator-pool      
    jpa:
       database-platform: org.hibernate.dialect.H2Dialect
    h2:
@@ -31,6 +41,31 @@ spring:
       web:
          skipPattern: (^cleanup.*|.+favicon.*)
    zipkin.service.name: order-service
+   
+camunda:
+  bpm:
+    enabled: true
+    process-engine-name: poc-engine
+    admin-user:
+      id: dev
+      password: dev
+      email: dev@local.local
+      first-name: dev
+      last-name: dev
+    database:
+      schema-update: true
+    filter:
+      create: All
+    authorization:
+      enabled: false
+    history-level: full
+    auto-deployment-enabled: true
+    default-number-of-retries: 3
+    job-execution:
+      enabled: true
+    webapp:
+      application-path: /dashboard   
+   
 payment.service.api.url: http://localhost:8070/payment-service/api/v1
 
 opentracing:

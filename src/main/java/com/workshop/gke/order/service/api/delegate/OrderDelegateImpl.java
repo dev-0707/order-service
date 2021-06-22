@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.workshop.gke.order.service.api.OrdersApiDelegate;
 import com.workshop.gke.order.service.dto.NewOrderDto;
@@ -46,9 +44,6 @@ public class OrderDelegateImpl implements OrdersApiDelegate {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderDelegateImpl.class);
 
-	@Autowired
-	private KafkaTemplate<String, String> kafkaTemplate;
-
 	@Override
 	public ResponseEntity<NewOrderDto> create() {
 		Order order = Order.builder().createDate(new Date()).status("open")
@@ -59,12 +54,6 @@ public class OrderDelegateImpl implements OrdersApiDelegate {
 		orderRepository.save(order);
 		NewOrderDto newOrder = new NewOrderDto();
 		newOrder.setId(order.getId());
-		try {
-			kafkaTemplate.send("order-created", objectMapper.writeValueAsString(newOrder));
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
 	}
 

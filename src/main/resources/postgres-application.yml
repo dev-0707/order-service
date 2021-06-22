@@ -1,0 +1,68 @@
+server:
+   port: 8080
+   servlet:
+      contextPath: /proximity-channel/orchestrator
+spring:
+   main:
+      banner-mode: off
+   datasource:        
+     url: jdbc:postgresql://192.168.43.181:5432/proximity_channel
+     username: postgres
+     password: dev
+     camunda: 
+      connectionTimeout: 180000
+      dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
+      idleTimeout: 180000
+      maxLifetime: 1800000
+      minimumIdle: 5
+      poolName: proximity-channel-orchestrator-pool
+   jackson: 
+#    date-format: com.telepass.core.configuration.RFC3339DateFormat
+    serialization: 
+      WRITE_DATES_AS_TIMESTAMPS: false
+jpa:
+  database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+datasource:
+  type: com.zaxxer.hikari.HikariDataSource
+  url: jdbc:postgresql://192.168.43.181:5432/proximity_channel
+  username: proximity_channel
+  password: dev
+hikari:
+  jdbc-url: postgresql://192.168.43.181:5432/proximity_channel
+  username: proximity_channel
+  password: dev
+  driver-class-name: org.postgresql.Driver
+  pool-name: proximity-channel-orchestrator-pool
+  idle-timeout: 3000
+  minimum-idle: 10
+  maximum-pool-size: 20
+  connection-timeout: 2000
+  connection-test-query: select 1
+  transaction-isolation: TRANSACTION_READ_COMMITTED
+camunda:
+  bpm:
+    enabled: true
+    process-engine-name: proximity-channel
+    admin-user:
+      id: dev
+      password: dev
+      email: dev@local.local
+      first-name: dev
+      last-name: dev
+    database:
+      schema-update: true
+    filter:
+      create: All
+    authorization:
+      enabled: false
+    history-level: full
+    auto-deployment-enabled: true
+    default-number-of-retries: 3
+    job-execution:
+      enabled: true
+    webapp:
+      application-path: /dashboard  
+info:
+   app:
+      name: proximity-channel-orchestrator
+      description: proximity-channel-orchestrator
