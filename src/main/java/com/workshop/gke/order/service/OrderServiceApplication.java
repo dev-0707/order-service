@@ -10,7 +10,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.client.RestTemplate;
 
 import com.workshop.gke.order.service.model.Order;
@@ -55,8 +54,4 @@ public class OrderServiceApplication implements CommandLineRunner {
 
 	}
 
-	@KafkaListener(topics = "order-created", groupId = "groupId")
-	public void listenGroupFoo(String message) {
-		System.out.println("Received Message in group foo: " + message);
-	}
 }
