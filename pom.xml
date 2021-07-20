@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.workshop</groupId>
 	<artifactId>order-service</artifactId>
-	<version>1.3.0</version>
+	<version>1.0.0</version>
 	<name>order-service</name>
 	<description>Order Service</description>
 	<properties>
