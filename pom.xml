@@ -20,6 +20,9 @@
 		<generated.sources.restapi.dir>${project.build.directory}/generated-sources</generated.sources.restapi.dir>
 		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
 		<commons-validator.version>1.7</commons-validator.version>
+		<camunda.spring-boot.version>7.13.0</camunda.spring-boot.version>
+		<jaxb.version>2.2.3</jaxb.version>
+		<camunda-bpm-process-test-coverage.version>0.3.2</camunda-bpm-process-test-coverage.version>		
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -124,6 +127,31 @@
             <artifactId>opentracing-spring-jaeger-starter</artifactId>
 			<version>3.0.0</version>
         </dependency>
+        
+        		<!-- Camunda Dependencies -->
+		<dependency>
+			<groupId>org.camunda.bpm.springboot</groupId>
+			<artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+			<version>${camunda.spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.camunda.bpm.springboot</groupId>
+			<artifactId>camunda-bpm-spring-boot-starter-rest</artifactId>
+			<version>${camunda.spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>${jaxb.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 
 
 <!-- 		<dependency> -->

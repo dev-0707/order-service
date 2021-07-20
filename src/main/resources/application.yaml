@@ -24,17 +24,12 @@ spring:
      idleTimeout: 180000
      maxLifetime: 1800000
      minimumIdle: 5
-     poolName: proximity-channel-orchestrator-pool      
+     poolName: order-service-engine-pool      
    jpa:
       database-platform: org.hibernate.dialect.H2Dialect
    h2:
       console:
          enabled: true
-   cloud:
-      gcp:
-         trace:
-            enabled: false
-            project-id: project-us-350-08
    sleuth:
       sampler:
          probability: 1
