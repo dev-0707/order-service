@@ -3,8 +3,9 @@ logging:
     root: INFO
 
 server:
-   servlet:
-      contextPath: /order-service
+  port: 8080
+  servlet:
+    contextPath: /order-service    
 spring:
    jmx:
       enabled: true

@@ -10,8 +10,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.web.client.RestTemplate;
 
+import com.workshop.gke.order.service.api.OrdersApiDelegate;
 import com.workshop.gke.order.service.model.Order;
 import com.workshop.gke.order.service.repository.OrderRepository;
 
@@ -28,6 +33,33 @@ public class OrderServiceApplication implements CommandLineRunner {
 	private OrderRepository orderRepository;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrderServiceApplication.class);
+
+	@Autowired
+	private OrdersApiDelegate orders;
+
+	@KafkaListener(topics = "order-requested", groupId = "order-requested-group", id = "3")
+	public void listenGroupFoo3(@Payload String message, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+			@Header(KafkaHeaders.OFFSET) int offsets) {
+
+		LOGGER.info("====================================================================");
+		LOGGER.info("Partition {}", partition);
+		LOGGER.info("Offset {}", offsets);
+		LOGGER.info("====================================================================");
+
+		orders.create();
+	}
+
+	@KafkaListener(topics = "order-requested", groupId = "order-requested-group", id = "1")
+	public void listenGroupFoo1(@Payload String message, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
+			@Header(KafkaHeaders.OFFSET) int offsets) {
+
+		LOGGER.info("====================================================================");
+		LOGGER.info("Partition {}", partition);
+		LOGGER.info("Offset {}", offsets);
+		LOGGER.info("====================================================================");
+
+		orders.create();
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(OrderServiceApplication.class, args);
