@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-service
+  labels:
+    app: order-service
+spec:
+  selector:
+    matchLabels:
+      app: order-service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: order-service
+    spec:
+      containers:
+        - name: order-service
+          image: europe-west4-docker.pkg.dev/project-us-350-08/docker-repository/order-service:1.3.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+          - name: application-config 
+            mountPath: "/config" 
+            readOnly: true
+      volumes:
+      - name: application-config
+        configMap:
+          name: order-service-properties
+          items:
+          - key: application.properties 
+            path: application.properties       
