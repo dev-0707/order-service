@@ -7,7 +7,7 @@ server:
       contextPath: /order-service
 spring:
    jmx:
-      enabled: true
+      enabled: false
    application:
       name: order-service
    jackson:
@@ -20,27 +20,8 @@ spring:
    h2:
       console:
          enabled: true
-   cloud:
-      gcp:
-         trace:
-            enabled: false
-            project-id: project-us-350-08
-   sleuth:
-      sampler:
-         probability: 1
-      web:
-         skipPattern: (^cleanup.*|.+favicon.*)
-   zipkin.service.name: order-service
+
 payment.service.api.url: http://localhost:8070/payment-service/api/v1
-
-opentracing:
-  jaeger:
-    enabled: true
-    udp-sender:
-      host: localhost
-      port: 6831
-    service-name: order-service
-
 
 management:
    trace:
