@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class OrderDelegateImpl implements OrdersApiDelegate {
+public class OrderAPIDelegateImpl implements OrdersApiDelegate {
 
 	@Value("${payment.service.api.url}")
 	private String productServiceAPIUrl;
@@ -42,7 +42,7 @@ public class OrderDelegateImpl implements OrdersApiDelegate {
 	@Autowired
 	ObjectMapper objectMapper;
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(OrderDelegateImpl.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderAPIDelegateImpl.class);
 
 	@Override
 	public ResponseEntity<NewOrderDto> create() {
@@ -51,9 +51,9 @@ public class OrderDelegateImpl implements OrdersApiDelegate {
 		String checkUri = productServiceAPIUrl + "/check";
 		LOGGER.info("Invoking Payment Service at: {}", checkUri);
 		paymentService.postForEntity(checkUri, Void.class, Void.class);
-		orderRepository.save(order);
+		Order createdOrder = orderRepository.save(order);
 		NewOrderDto newOrder = new NewOrderDto();
-		newOrder.setId(order.getId());
+		newOrder.setId(createdOrder.getId());
 		return new ResponseEntity<>(newOrder, HttpStatus.CREATED);
 	}
 
