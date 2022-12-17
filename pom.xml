@@ -79,14 +79,6 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-
-
-
-
-
-
-
 		<!-- <dependency> -->
 		<!-- <groupId>io.opentracing.contrib</groupId> -->
 		<!-- <artifactId>opentracing-spring-jaeger-starter</artifactId> -->
@@ -160,23 +152,6 @@
 								<useBeanValidation>true</useBeanValidation>
 							</configOptions>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.openclover</groupId>
-				<artifactId>clover-maven-plugin</artifactId>
-				<configuration>
-					<generateHtml>true</generateHtml>
-					<generateXml>true</generateXml>
-					<generatePdf>true</generatePdf>
-					<generateJson>true</generateJson>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>instrument</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
