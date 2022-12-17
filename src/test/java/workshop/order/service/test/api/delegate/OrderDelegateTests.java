@@ -1,4 +1,4 @@
-package com.workshop.gke.order.service.test.api.delegate;
+package workshop.order.service.test.api.delegate;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -26,13 +26,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
-import com.workshop.gke.order.service.api.OrdersApiDelegate;
-import com.workshop.gke.order.service.dto.NewOrderDto;
-import com.workshop.gke.order.service.dto.OrderDto;
-import com.workshop.gke.order.service.exception.OrderNotFoundException;
-import com.workshop.gke.order.service.model.Order;
-import com.workshop.gke.order.service.repository.OrderRepository;
-import com.workshop.gke.order.service.test.config.OrderServiceTestConfig;
+import workshop.order.service.api.OrdersApiDelegate;
+import workshop.order.service.dto.NewOrderDto;
+import workshop.order.service.dto.OrderDto;
+import workshop.order.service.model.Order;
+import workshop.order.service.repository.OrderRepository;
+import workshop.order.service.test.config.OrderServiceTestConfig;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = OrderServiceTestConfig.class)

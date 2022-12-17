@@ -1,14 +1,15 @@
-package com.workshop.gke.order.service.test.config;
+package workshop.order.service.test.config;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.TestPropertySource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.workshop.gke.order.service.api.OrdersApiDelegate;
-import com.workshop.gke.order.service.api.delegate.OrderAPIDelegateImpl;
-import com.workshop.gke.order.service.api.delegate.OrderMapper;
-import com.workshop.gke.order.service.api.delegate.OrderMapperImpl;
+
+import workshop.order.service.api.OrdersApiDelegate;
+import workshop.order.service.api.delegate.OrderAPIDelegateImpl;
+import workshop.order.service.api.delegate.OrderMapper;
+import workshop.order.service.api.delegate.OrderMapperImpl;
 
 @TestPropertySource(locations = "classpath:test.properties")
 @TestConfiguration

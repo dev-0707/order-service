@@ -140,8 +140,8 @@
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<modelNameSuffix>Dto</modelNameSuffix>
-							<apiPackage>com.workshop.gke.order.service.api</apiPackage>
-							<modelPackage>com.workshop.gke.order.service.dto</modelPackage>
+							<apiPackage>workshop.order.service.api</apiPackage>
+							<modelPackage>workshop.order.service.dto</modelPackage>
 							<supportingFilesToGenerate>
 								ApiUtil.java
 							</supportingFilesToGenerate>

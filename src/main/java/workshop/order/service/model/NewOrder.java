@@ -1,4 +1,4 @@
-package com.workshop.gke.order.service.model;
+package workshop.order.service.model;
 
 import java.util.UUID;
 

@@ -1,4 +1,4 @@
-package com.workshop.gke.order.service;
+package workshop.order.service;
 
 import java.util.Date;
 import java.util.UUID;
@@ -12,13 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import com.workshop.gke.order.service.model.Order;
-import com.workshop.gke.order.service.repository.OrderRepository;
-
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import workshop.order.service.model.Order;
+import workshop.order.service.repository.OrderRepository;
 
 @SpringBootApplication
 @EnableSwagger2

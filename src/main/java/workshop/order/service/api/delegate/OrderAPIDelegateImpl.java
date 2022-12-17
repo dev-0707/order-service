@@ -1,4 +1,4 @@
-package com.workshop.gke.order.service.api.delegate;
+package workshop.order.service.api.delegate;
 
 import java.util.Date;
 import java.util.List;
@@ -15,13 +15,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.workshop.gke.order.service.api.OrdersApiDelegate;
-import com.workshop.gke.order.service.dto.NewOrderDto;
-import com.workshop.gke.order.service.dto.OrderDto;
-import com.workshop.gke.order.service.model.Order;
-import com.workshop.gke.order.service.repository.OrderRepository;
-
+import workshop.order.service.api.OrdersApiDelegate;
+import workshop.order.service.dto.NewOrderDto;
+import workshop.order.service.dto.OrderDto;
 import lombok.extern.slf4j.Slf4j;
+import workshop.order.service.model.Order;
+import workshop.order.service.repository.OrderRepository;
 
 @Component
 @Slf4j
